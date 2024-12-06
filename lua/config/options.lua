@@ -30,6 +30,8 @@ vim.opt.wildignore:append({ "*/node_modules/*" })
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.splitkeep = "cursor"
+vim.o.textwidth = 80 -- Wrap text at 80 characters
+vim.o.wrapmargin = 2 -- Add a 2-character margin before wrapping
 
 -- Add asterisks in block comments
 vim.opt.formatoptions:append({ "r" })

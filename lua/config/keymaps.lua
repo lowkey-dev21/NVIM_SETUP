@@ -18,14 +18,17 @@ keymap.set("n", "<Leader>Q", ":qa<Return>", opts)
 -- File explorer with NvimTree
 keymap.set("n", "<Leader>f", ":NvimTreeFindFile<Return>", opts)
 keymap.set("n", "<Leader>t", ":NvimTreeToggle<Return>", opts)
+keymap.set("n", "<Leader>r", ":NvimTreeRefresh<CR>", opts)
+
+-- Move and paste files in NvimTree
+keymap.set("n", "<Leader>m", ":lua require('nvim-tree.api').fs.cut()<CR>", opts) -- Mark file for moving
+keymap.set("n", "<Leader>p", ":lua require('nvim-tree.api').fs.paste()<CR>", opts) -- Paste the file
 
 -- Tabs
 keymap.set("n", "te", ":tabedit")
 keymap.set("n", "<tab>", ":tabnext<Return>", opts)
 keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
 keymap.set("n", "tw", ":tabclose<Return>", opts)
-
-keymap.set("n", "<leader>r", ":NvimTreeRefresh<CR>", { noremap = true, silent = true })
 
 -- Split window
 keymap.set("n", "ss", ":split<Return>", opts)
@@ -43,7 +46,17 @@ keymap.set("n", "<C-S-l>", "<C-w>>")
 keymap.set("n", "<C-S-k>", "<C-w>+")
 keymap.set("n", "<C-S-j>", "<C-w>-")
 
--- Diagnostics
-keymap.set("n", "<C-j>", function()
-  vim.diagnostic.goto_next()
+-- Move and paste files in NvimTree
+keymap.set("n", "<Leader>m", function()
+  require("nvim-tree.api").fs.cut() -- Mark file for moving
 end, opts)
+
+keymap.set("n", "<Leader>p", function()
+  require("nvim-tree.api").fs.paste() -- Paste the file
+end, opts)
+
+-- Diagnostics
+keymap.set("n", "<C-j>", function() vim.diagnostic.goto_next() end, opts)
+
+-- Toggle word wrap with Alt + Z
+vim.api.nvim_set_keymap("n", "<A-z>", ":set wrap!<CR>", { noremap = true, silent = true })
